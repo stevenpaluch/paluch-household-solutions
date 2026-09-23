@@ -4,12 +4,34 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#365c43"><title>Paluch Nutrition Solutions</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23365c43'/%3E%3Ctext x='7' y='24' font-family='Georgia' font-size='25' fill='white'%3EP%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
+<style>
+:root{--bg:#f3f2eb;--surface:#fffef9;--ink:#253a30;--muted:#5c6d60;--line:#dce2d7;--soft:#e7eddf;--accent:#365c43;--radius:14px}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer;min-height:44px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:9px 14px;border-radius:9px}button:hover{border-color:var(--accent)}button:focus,input:focus,select:focus,textarea:focus,a:focus{outline:3px solid #ad733b;outline-offset:3px}button.primary,button[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}button.danger{color:#8b3732}button.small{font-size:14px;padding:8px 11px}button:disabled{cursor:default;opacity:.6}input,select,textarea{display:block;width:100%;min-width:0;min-height:44px;padding:10px 12px;border:1px solid #a8b8a6;border-radius:8px;color:var(--ink);background:var(--surface);margin:7px 0 16px}textarea{resize:vertical}label{display:block;font-size:14px}a{color:var(--accent);text-underline-offset:3px}.app{max-width:1260px;margin:auto;padding:24px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}.eyebrow{text-transform:uppercase;letter-spacing:1.7px;font-size:12px;color:var(--muted);margin-bottom:6px}h1{font:28px/1.2 Georgia,serif;margin:0}h2{font:30px/1.2 Georgia,serif;margin:0 0 20px}h3{font-size:18px;font-weight:500;margin:0 0 12px}p{margin:0 0 18px;color:var(--muted)}.save-status{font-size:13px;text-align:right;color:var(--muted)}.save-status span{display:block}.shell{display:grid;grid-template-columns:150px minmax(0,1fr);grid-gap:22px;align-items:start}.main-nav{display:grid;grid-template-rows:repeat(4,minmax(132px,1fr));grid-gap:14px;position:sticky;top:16px}.main-nav button{display:flex;flex-direction:column;justify-content:center;align-items:center;border-radius:var(--radius);padding:16px 8px}.main-nav svg{display:block;width:var(--icon-size,67px);height:var(--icon-size,67px);fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;margin-bottom:10px;flex-shrink:0}.main-nav span{white-space:nowrap}main{min-width:0;min-height:570px;padding:26px;background:var(--surface);border:1px solid var(--line);border-radius:16px}.subnav{display:flex;flex-wrap:wrap;margin:0 -4px 20px}.subnav button{margin:4px;font-size:14px;padding:9px 11px}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-column-gap:16px}.actions{display:flex;flex-wrap:wrap;margin:4px -4px 18px}.actions button{margin:4px}.row{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:16px 0}.row-content{min-width:0;overflow-wrap:break-word;flex:1;margin-right:12px}.row-content small{display:block;color:var(--muted);font-size:14px;margin-top:4px}.row-actions{display:flex;flex-wrap:wrap;justify-content:flex-end}.row-actions button{margin:3px}.badge{display:inline-block;font-size:12px;padding:4px 8px;background:var(--soft);border-radius:7px;margin-right:6px}.badge.planned{background:#f5ead4;color:#745116}.badge.eaten{background:#dfebdd;color:#284c2f}.empty,.future{padding:20px;background:var(--soft);border-radius:12px;margin:20px 0}.empty p,.future p{margin:0}.section-top,.day-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:20px 0}.section-top p{margin:0 12px 8px 0}.foot,footer{font-size:13px;color:var(--muted);margin-top:22px}footer{padding:0 0 0 172px}.shopping-form{display:grid;grid-template-columns:2fr 1fr auto;grid-column-gap:12px;align-items:end;margin:22px 0}.shopping-form button{margin-bottom:16px}.check{display:flex;align-items:center;font-size:16px;flex:1;min-width:0}.check input{width:24px;height:24px;min-height:24px;flex:0 0 24px;margin:0 14px 0 0}.check span{overflow-wrap:break-word}.check.done span{text-decoration:line-through;color:var(--muted)}.month-controls{display:flex;align-items:center;flex-wrap:wrap;margin:0 -4px 10px}.month-controls>*{margin:4px}.month-controls h3{flex:1;text-align:center}.calendar-grid,.weekdays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));grid-gap:5px}.weekdays{text-align:center;font-size:13px;color:var(--muted);margin:14px 0 8px}.calendar-grid button{position:relative;min-height:54px;padding:5px 0 17px;font-size:14px}.calendar-grid button.today{font-weight:bold;border:2px solid var(--accent)}.calendar-grid .dots{position:absolute;bottom:6px;left:0;right:0;display:flex;justify-content:center}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin:0 3px;flex:0 0 7px}.dot.planned{background:#b38133}.dot.eaten{background:#527b42}.calendar-grid button[aria-pressed=true] .dot.eaten{background:#d1edc8}.calendar-grid button[aria-pressed=true] .dot.planned{background:#f3d49b}.calendar-legend{font-size:12px;color:var(--muted);display:flex}.calendar-legend span{margin-right:16px}.recipe{border-bottom:1px solid var(--line);padding:20px 0}.recipe-text{white-space:pre-wrap;overflow-wrap:break-word;margin:12px 0 20px}.recipe details{margin-top:14px}.recipe summary{cursor:pointer;min-height:44px;padding:10px 0}.recipe .row{padding:0;border:0}.recipe h3{margin:0}#message:empty{display:none}#message{padding:12px 16px;background:#e2ebdf;border:1px solid #bbcdb7;border-radius:10px;margin-bottom:16px}#message.error{background:#fae8e4;color:#7b2821;border-color:#d8a79d}[hidden]{display:none!important}form{margin-top:16px}button,a,input{touch-action:manipulation}
+@media(max-width:760px){.app{padding:16px}.shell{grid-template-columns:120px minmax(0,1fr);grid-gap:14px}main{padding:20px}.main-nav button{font-size:14px}footer{padding-left:134px}.row{align-items:flex-start}.row-actions{max-width:100px}.shopping-form{grid-template-columns:1fr 1fr}.shopping-form button{grid-column:1 / -1}.save-status{max-width:140px}}
+@media(max-width:560px){.app{padding:12px}.top{align-items:flex-start}h1{font-size:22px}.eyebrow{font-size:11px}.save-status{font-size:11px;margin-left:14px}.shell{display:block}.main-nav{position:static;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:auto;grid-gap:6px;margin-bottom:16px}.main-nav button{font-size:12px;padding:12px 3px;min-height:106px}.fields{grid-template-columns:1fr}main{padding:16px;min-height:0}footer{padding:0}.month-controls h3{font-size:16px}.calendar-grid,.weekdays{grid-gap:3px}.calendar-grid button{min-height:44px}.row{flex-wrap:wrap}.row-actions{max-width:none;width:100%;justify-content:flex-start;margin-top:8px}.section-top button{margin-top:8px}}
+.receipt-section{border-top:1px solid var(--line);margin-top:28px;padding-top:24px}.receipt-section input[type=file]{padding:10px;max-width:100%;font-size:14px}.receipt-workspace{display:flex;align-items:flex-start;flex-wrap:wrap;margin:20px -8px 0}.receipt-workspace>div,.receipt-workspace>form{min-width:0;flex:1 1 260px;margin:0 8px 16px}#receipt-preview{display:block;width:100%;height:auto;max-height:520px;object-fit:contain;background:#e7eddf;border:1px solid var(--line);border-radius:10px}#receipt-filename{overflow-wrap:break-word}.receipt-item{min-width:0;border:1px solid var(--line);border-radius:10px;margin:16px 0;padding:14px}.receipt-item legend{font-size:14px;padding:0 8px}.receipt-item .fields{grid-template-columns:1fr}#receipt-feedback:not(:empty){padding:12px 16px;background:var(--soft);border-radius:10px;margin-top:16px}#receipt-save{white-space:normal}#receipt-help{margin-top:0}
+/* Tablet refinement: screen-sized shell, a compact month and a seven-column week. */
+.header-settings{text-align:right}.touch-setting{display:flex;align-items:center;justify-content:flex-end;font-size:12px;margin-bottom:5px}.touch-setting input{display:inline-block;width:20px;min-height:20px;height:20px;margin:0 8px 0 0}.main-nav svg{stroke-width:1.65}.main-nav .icon-soft{stroke-width:2.2}.main-nav button{box-shadow:0 1px 2px rgba(37,58,48,.03)}button{transition:box-shadow .15s ease,border-color .15s ease,background-color .15s ease}button.tap-armed{box-shadow:0 0 0 3px #b6cbb0,0 4px 10px rgba(37,58,48,.12)}
+@media(hover:hover) and (pointer:fine){button:hover:not(:disabled){box-shadow:0 3px 9px rgba(37,58,48,.14);border-color:#8aa182}}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
+#touch-hint{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:30;background:#253a30;color:white;padding:9px 16px;border-radius:24px;font-size:13px;pointer-events:none}#touch-hint:empty{display:none}
+.calendar-top{display:flex;justify-content:space-between;align-items:center;flex-shrink:0}.calendar-top h2{margin-bottom:10px}.calendar-switch{display:flex}.calendar-switch button{margin-left:6px}.calendar-hint{text-align:center;font-size:13px;margin:12px 0 0}.calendar-top .eyebrow{font-size:11px}.calendar-foot{font-size:12px;margin:10px 0 0;flex-shrink:0}.calendar-legend{margin:2px 0 8px;flex-shrink:0}#calendar-browse{display:flex;flex-direction:column;flex:1;min-height:0}.month-controls{flex-shrink:0}.calendar-grid{grid-gap:5px}.calendar-grid button{min-height:44px;height:44px;padding:3px 0 14px}.weekdays{margin-top:4px}#calendar-month-view{width:100%;max-width:480px;align-self:center}#calendar-week-view{flex:1;min-height:0;display:flex;flex-direction:column}.week-grid{display:grid;grid-template-columns:62px repeat(7,minmax(0,1fr));grid-template-rows:48px repeat(4,minmax(44px,1fr));grid-gap:4px;flex:1;min-height:0}.week-corner,.week-label{font-size:12px;display:flex;align-items:center;color:var(--muted)}.week-day{padding:4px 0;min-height:44px;font-size:12px;line-height:1.2;border:0;background:var(--soft)}.week-day span,.week-day strong{display:block}.week-day strong{font-size:17px;font-weight:500;margin-top:2px}.week-slot{padding:6px;min-width:0;min-height:44px;text-align:left;overflow:hidden;border-radius:8px;display:flex;flex-direction:column;justify-content:center}.week-slot.vacant{color:#879583;text-align:center;align-items:center;font-size:22px;background:#f9faf5}.week-slot.eaten{background:#e5eee1;border-left:3px solid #527b42}.week-slot.planned{background:#f8f0df;border-left:3px solid #b38133}.slot-status{font-size:10px;color:var(--muted)}.slot-title{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:12px;line-height:1.3;overflow-wrap:break-word}.slot-more{font-size:10px;color:var(--muted)}.meal-pagination{display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:12px}.meal-pagination>*{margin:0 6px}.day-heading{margin:6px 0 10px}.day-heading h3{font-size:16px;margin:0 8px;flex:1;text-align:center}.meal-title{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:break-word}.meal-note{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#meal-form input,#meal-form select,#meal-form textarea{margin:4px 0 9px;padding:7px 10px}#meal-form textarea{height:52px;min-height:44px;resize:none}#meal-form h3{margin-bottom:8px}#meal-form .actions{margin:0 -4px}#meal-form{margin-top:0}#meal-form .fields{grid-column-gap:12px}
+@media(min-width:768px) and (min-height:500px){html,body{height:100%;overflow:hidden}.app{height:var(--app-height,100vh);max-width:1360px;display:flex;flex-direction:column;padding:16px 20px}.top{margin-bottom:14px;flex-shrink:0}h1{font-size:25px}.shell{flex:1;min-height:0;grid-template-columns:132px minmax(0,1fr);grid-gap:18px;align-items:stretch}.main-nav{min-height:0;position:static;grid-template-rows:repeat(4,minmax(0,1fr));grid-gap:12px}.main-nav button{min-height:0;padding:8px}.main-nav svg{margin-bottom:8px}main{min-height:0;padding:18px;overflow:auto;-webkit-overflow-scrolling:touch}main.calendar-active{overflow:hidden}main.calendar-active>section:not([hidden]){height:100%;min-height:0;display:flex;flex-direction:column}footer{padding-left:150px;margin-top:10px;font-size:11px;flex-shrink:0}#message:not(:empty){position:absolute;left:50%;top:8px;transform:translateX(-50%);max-width:65%;z-index:20;box-shadow:0 3px 12px rgba(37,58,48,.12);font-size:13px;pointer-events:none}.calendar-top h2{font-size:27px}.calendar-grid{grid-gap:4px}.calendar-grid button{height:44px}.calendar-hint{margin-top:8px}#calendar-day-view{flex:1;min-height:0}.row{padding:12px 0}}
+@media(min-width:768px) and (max-height:640px) and (min-height:500px){.app{padding:10px 16px}.top{margin-bottom:8px}.top .eyebrow{display:none}footer{display:none}.calendar-top .eyebrow{display:none}.calendar-top h2{margin-bottom:6px}.calendar-foot{display:none}.month-controls{margin-bottom:4px}.calendar-hint{margin-top:4px}.calendar-grid{grid-gap:2px}.weekdays{margin-bottom:3px}.calendar-legend{margin-bottom:4px}#meal-form .fields{grid-template-columns:repeat(4,minmax(0,1fr))}#meal-form label{font-size:13px}main{padding:14px}}
+@media(max-width:767px){#calendar-week-view{min-height:330px}.week-grid{grid-template-columns:48px repeat(7,minmax(0,1fr))}.week-label{font-size:10px}.week-slot{padding:3px}.slot-title{font-size:11px}.calendar-top{flex-wrap:wrap}.calendar-switch{margin-bottom:10px}.calendar-top .eyebrow{display:none}.header-settings{max-width:160px}.touch-setting{font-size:11px}.touch-setting input{flex:0 0 20px}.header-settings .save-status{display:block;max-width:none}.day-heading{flex-wrap:wrap}.day-heading h3{flex-basis:100%;order:-1;margin:0 0 10px}.meal-pagination>*{margin:0 3px}.calendar-grid button{min-width:0}.week-grid button{padding-left:1px;padding-right:1px}}
+
+body{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22240%22%20height%3D%22208%22%20viewBox%3D%220%200%20240%20208%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23859078%22%20stroke-opacity%3D%22.10%22%20stroke-width%3D%221%22%3E%3Cpath%20d%3D%22M0%200h80l40%2069-40%2070H0l40-70Zm80%200v46l40%2023%2040-23V0m-40%2069v70l40%2023%2040-23V69l-40-23m40%2023%2040-23V0M0%20139l40%2023v46m40-69v46l40%2023%2040-46m40-23%2040%2023m-80%200v46m40-69%2040-70M0%200l40%2023%2040-23M0%2069l40-46m0%20139%2040-23M200%20208v-23l40-23%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");background-size:240px 208px}
+@media(min-width:768px) and (min-height:500px) and (max-height:579px){.calendar-legend,.calendar-hint{display:none}.month-controls h3{font-size:16px}.calendar-top h2{font-size:24px}}
+
+/* Explicit spacing and checkbox sizing, including older Safari. */
+.header-settings{max-width:300px}.touch-setting{display:flex;flex-direction:row;align-items:center;justify-content:flex-end;min-height:44px;margin:0;line-height:1.3}.touch-setting input[type=checkbox]{display:inline-block;flex:0 0 22px;width:22px;max-width:22px;height:22px;min-height:22px;margin:0 9px 0 0;padding:0;-webkit-appearance:checkbox;appearance:checkbox;border-radius:3px}.touch-setting span{display:block;font-size:12px}.touch-explanation{display:block;font-size:11px;color:var(--muted);margin:0 0 4px}.header-settings .save-status{display:block;font-size:11px;margin:0;max-width:none}.calendar-switch{padding-left:8px}.calendar-switch button{margin-left:0;min-width:76px}.calendar-switch button+button{margin-left:18px}
+@media(max-width:560px){.header-settings{max-width:160px}.touch-setting span{font-size:11px}.touch-explanation{font-size:11px}.calendar-switch{padding-left:0}}
+
+</style>
 </head>
 <body>
 <div class="app">
-<header class="top"><div><div class="eyebrow">Paluch Household Solutions</div><h1>Nutrition, made simple.</h1></div><div class="header-settings"><label class="touch-setting"><input id="double-tap" type="checkbox" checked> Double-tap touch buttons</label><span class="save-status">Saved on this browser only</span></div></header>
-<div id="message" role="status" aria-live="polite"></div><div id="touch-hint" role="status" aria-live="polite"></div>
+<header class="top"><div><div class="eyebrow">Paluch Household Solutions</div><h1>Nutrition, made simple.</h1></div><div class="header-settings"><span class="save-status">Your entries are saved in this browser.</span></div></header>
+<div id="message" role="status" aria-live="polite"></div>
 <div class="shell">
 <nav class="main-nav" aria-label="Main features">
 <button type="button" data-page="food" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2.5"/><path d="M5 10h14M8 5v2M8 13v4"/><path class="icon-soft" d="M12 14c0-3 3-3 3-3s1 4-3 5"/></svg><span>Our food</span></button>
@@ -49,4 +71,323 @@
 </section>
 
 </main></div><footer>Paluch Nutrition Solutions · Data stays in this browser. Clearing browser data removes saved entries.</footer></div>
+<script>
+(function () {
+  'use strict';
+  var KEY = 'paluch-nutrition.v1';
+  var state = { version: 1, food: [], recipes: [], shopping: [], meals: [], preferences: {} };
+  var storageBlocked = false;
+  var foodLocation = 'Refrigerator';
+  var calendarMode = 'month';
+  var mealPage = 0;
+  var mealsPerPage = 2;
+  var selectedDate = dateKey(new Date());
+  var month = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+  function el(id) { return document.getElementById(id); }
+  function each(selector, fn) { Array.prototype.forEach.call(document.querySelectorAll(selector), fn); }
+  function dateKey(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function pad(n) { return n < 10 ? '0' + n : String(n); }
+  function parseDate(s) { var p = s.split('-'); return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2])); }
+  function validDate(s) { return /^\d{4}-\d{2}-\d{2}$/.test(s) && dateKey(parseDate(s)) === s; }
+  function id() { return Date.now().toString(36) + Math.random().toString(36).slice(2); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function notice(text, error) { el('message').textContent = text; el('message').className = error ? 'error' : ''; }
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved) {
+      var candidate = JSON.parse(saved);
+      if (candidate.version !== 1 || !Array.isArray(candidate.food) || !Array.isArray(candidate.recipes) || !Array.isArray(candidate.shopping) || !Array.isArray(candidate.meals)) throw new Error('Unsupported saved data');
+      state = candidate;
+      state.preferences = state.preferences || {};
+    }
+  } catch (error) {
+    storageBlocked = true;
+    notice('Saved data could not be loaded. Changes cannot be saved. Reload or check browser storage before adding entries.', true);
+  }
+  // Replace this storage adapter with a server API when the Odroid backend is added.
+  // Roll back failed writes so the UI never reports an unsaved change as saved.
+  function update(change, success) {
+    if (storageBlocked) { notice('Browser storage is unavailable. Your change was not saved.', true); return false; }
+    var before = JSON.stringify(state);
+    try {
+      change();
+      localStorage.setItem(KEY, JSON.stringify(state));
+    } catch (error) {
+      state = JSON.parse(before);
+      notice('Your change could not be saved. Browser storage may be full or unavailable.', true);
+      return false;
+    }
+    renderAll();
+    notice(success || 'Saved on this browser.');
+    return true;
+  }
+  function find(list, value) { for (var i = 0; i < list.length; i++) if (list[i].id === value) return list[i]; return null; }
+  function replace(list, item) { for (var i = 0; i < list.length; i++) if (list[i].id === item.id) { list[i] = item; return; } list.push(item); }
+  function remove(list, value) { for (var i = list.length - 1; i >= 0; i--) if (list[i].id === value) list.splice(i, 1); }
+  function empty(text) { return '<div class="empty"><p>' + esc(text) + '</p></div>'; }
+  function actions(kind, value) { return '<div class="row-actions"><button class="small" data-edit="' + kind + '" data-id="' + esc(value) + '">Edit</button><button class="small danger" data-delete="' + kind + '" data-id="' + esc(value) + '">Delete</button></div>'; }
+  function showPage(page) {
+    each('[data-page]', function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-page') === page)); });
+    each('[data-panel]', function (p) { p.hidden = p.getAttribute('data-panel') !== page; });
+    document.querySelector('main').classList.toggle('calendar-active', page === 'calendar');
+  }
+  function showFood(location) {
+    foodLocation = location;
+    each('[data-food]', function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-food') === location)); });
+    el('food-add').hidden = location !== 'add'; el('inventory-view').hidden = location === 'add';
+    renderFood();
+  }
+  each('[data-page]', function (b) { b.onclick = function () { showPage(b.getAttribute('data-page')); }; });
+  each('[data-food]', function (b) { b.onclick = function () { showFood(b.getAttribute('data-food')); }; });
+  each('[data-recipe]', function (b) { b.onclick = function () {
+    var which = b.getAttribute('data-recipe');
+    each('[data-recipe]', function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+    el('saved-recipes').hidden = which !== 'saved'; el('recipe-ideas').hidden = which !== 'ideas';
+  }; });
+  function renderFood() {
+    el('inventory-description').textContent = foodLocation === 'Evergreen staples' ? 'Long-lasting oils, spices and essentials you have on hand.' : 'What you have in the ' + foodLocation.toLowerCase() + '.';
+    var items = state.food.filter(function (f) { return f.location === foodLocation; });
+    items.sort(function (a, b) { return (a.useBy || '9999').localeCompare(b.useBy || '9999'); });
+    el('inventory-list').innerHTML = items.map(function (f) {
+      return '<div class="row"><div class="row-content">' + esc(f.name) + '<small>' + esc(f.quantity) + (f.useBy ? ' · Use by ' + esc(f.useBy) : '') + '</small></div>' + actions('food', f.id) + '</div>';
+    }).join('') || empty('Nothing here yet. Use Add groceries to enter your food.');
+  }
+  function clearFood() { el('food-form').reset(); el('food-id').value = ''; el('food-form-title').textContent = 'Add groceries'; }
+  el('food-cancel').onclick = clearFood;
+  el('food-form').onsubmit = function (event) {
+    event.preventDefault();
+    var name = el('food-name').value.trim(), quantity = el('food-quantity').value.trim();
+    if (!name || !quantity) { notice('Enter a food name and quantity.', true); return; }
+    if (el('food-date').value && !validDate(el('food-date').value)) { notice('Enter a valid use-by date.', true); return; }
+    var item = { id: el('food-id').value || id(), name: name, quantity: quantity, location: el('food-location').value, useBy: el('food-date').value };
+    if (update(function () { replace(state.food, item); }, 'Food saved.')) { clearFood(); showFood(item.location); }
+  };
+  function safeSource(value) { if (!value) return ''; try { var u = new URL(value); return (u.protocol === 'https:' || u.protocol === 'http:') ? u.href : null; } catch (e) { return null; } }
+  function renderRecipes() {
+    el('recipe-list').innerHTML = state.recipes.map(function (r) {
+      var source = safeSource(r.source);
+      return '<article class="recipe"><div class="row"><div class="row-content"><h3>' + esc(r.name) + '</h3><small>' + (r.minutes ? esc(r.minutes) + ' minutes · ' : '') + (source ? 'Saved from the web' : 'Household recipe') + '</small></div>' + actions('recipes', r.id) + '</div><details><summary>Ingredients &amp; instructions</summary><h3>Ingredients</h3><div class="recipe-text">' + esc(r.ingredients) + '</div><h3>Instructions</h3><div class="recipe-text">' + esc(r.instructions) + '</div>' + (source ? '<a href="' + esc(source) + '" target="_blank" rel="noopener noreferrer">View original recipe</a>' : '') + '</details></article>';
+    }).join('') || empty('No recipes saved yet. Add a family recipe or one you found online.');
+    var value = el('meal-recipe').value;
+    el('meal-recipe').innerHTML = '<option value="">Write a meal below</option>' + state.recipes.map(function (r) { return '<option value="' + esc(r.id) + '">' + esc(r.name) + '</option>'; }).join('');
+    el('meal-recipe').value = find(state.recipes, value) ? value : '';
+  }
+  function openRecipe(value) {
+    el('recipe-form').reset(); el('recipe-id').value = '';
+    var r = find(state.recipes, value);
+    el('recipe-form-title').textContent = r ? 'Edit recipe' : 'Add a recipe';
+    if (r) { el('recipe-id').value = r.id; ['name', 'source', 'minutes', 'ingredients', 'instructions'].forEach(function (key) { el('recipe-' + key).value = r[key] || ''; }); }
+    el('recipe-form').hidden = false; el('recipe-name').focus();
+  }
+  el('new-recipe').onclick = function () { openRecipe(''); };
+  el('recipe-cancel').onclick = function () { el('recipe-form').hidden = true; };
+  el('recipe-form').onsubmit = function (event) {
+    event.preventDefault(); var source = safeSource(el('recipe-source').value.trim());
+    if (source === null) { notice('Use an http or https recipe link.', true); return; }
+    var r = { id: el('recipe-id').value || id(), name: el('recipe-name').value.trim(), source: source, minutes: el('recipe-minutes').value, ingredients: el('recipe-ingredients').value.trim(), instructions: el('recipe-instructions').value.trim() };
+    if (!r.name || !r.ingredients || !r.instructions) { notice('Enter the recipe name, ingredients and instructions.', true); return; }
+    if (update(function () { replace(state.recipes, r); }, 'Recipe saved.')) el('recipe-form').hidden = true;
+  };
+  ['adventure', 'difficulty', 'time'].forEach(function (key) { if (state.preferences[key]) el('ideas-' + key).value = state.preferences[key]; });
+  el('ideas-form').onsubmit = function (event) { event.preventDefault(); update(function () { ['adventure', 'difficulty', 'time'].forEach(function (key) { state.preferences[key] = el('ideas-' + key).value; }); }, 'Preferences saved for future recipe discovery.'); };
+  function renderShopping() {
+    el('shopping-list').innerHTML = state.shopping.map(function (s) { return '<div class="row"><label class="check' + (s.done ? ' done' : '') + '"><input type="checkbox" data-check="' + esc(s.id) + '"' + (s.done ? ' checked' : '') + '><span>' + esc(s.name) + (s.quantity ? ' · ' + esc(s.quantity) : '') + '</span></label><button class="small danger" data-delete="shopping" data-id="' + esc(s.id) + '" aria-label="Delete ' + esc(s.name) + '">Delete</button></div>'; }).join('') || empty('Your list is clear. Add an item for your next grocery trip.');
+  }
+  el('shopping-form').onsubmit = function (event) { event.preventDefault(); var name = el('shopping-name').value.trim(); if (!name) { notice('Enter an item name.', true); return; } var item = { id: id(), name: name, quantity: el('shopping-quantity').value.trim(), done: false }; if (update(function () { state.shopping.push(item); }, 'Shopping item added.')) el('shopping-form').reset(); };
+  function friendlyDate(key) { return parseDate(key).toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }); }
+  function startOfWeek(key) { var d = parseDate(key); d.setDate(d.getDate() - d.getDay()); return d; }
+  function renderCalendar() {
+    var weekStart = startOfWeek(selectedDate);
+    var weekEnd = new Date(weekStart.getFullYear(), weekStart.getMonth(), weekStart.getDate() + 6);
+    var isWeek = calendarMode === 'week';
+    el('calendar-browse').hidden = calendarMode === 'day' || calendarMode === 'edit';
+    el('calendar-day-view').hidden = calendarMode !== 'day';
+    el('meal-form').hidden = calendarMode !== 'edit';
+    el('calendar-month-view').hidden = calendarMode !== 'month';
+    el('calendar-week-view').hidden = !isWeek;
+    el('calendar-month').setAttribute('aria-pressed', String(calendarMode === 'month'));
+    el('calendar-week').setAttribute('aria-pressed', String(calendarMode !== 'month'));
+    el('month-prev').setAttribute('aria-label', isWeek ? 'Previous week' : 'Previous month');
+    el('month-next').setAttribute('aria-label', isWeek ? 'Next week' : 'Next month');
+    el('month-title').textContent = isWeek ? weekStart.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + ' – ' + weekEnd.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : month.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+    var html = '', i, days = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate();
+    for (i = 0; i < month.getDay(); i++) html += '<span></span>';
+    for (i = 1; i <= days; i++) {
+      var key = dateKey(new Date(month.getFullYear(), month.getMonth(), i));
+      var meals = state.meals.filter(function (m) { return m.date === key; });
+      var planned = meals.some(function (m) { return m.status === 'planned'; });
+      var eaten = meals.some(function (m) { return m.status === 'eaten'; });
+      html += '<button data-single-tap="true" data-day="' + key + '" aria-pressed="' + (key === selectedDate) + '" class="' + (key === dateKey(new Date()) ? 'today' : '') + '" aria-label="' + esc(friendlyDate(key)) + ', open week' + (planned ? ', planned meals' : '') + (eaten ? ', meals eaten' : '') + '">' + i + '<span class="dots" aria-hidden="true">' + (planned ? '<b class="dot planned"></b>' : '') + (eaten ? '<b class="dot eaten"></b>' : '') + '</span></button>';
+    }
+    el('calendar-grid').innerHTML = html;
+    var weekHTML = '<div class="week-corner">Meal</div>';
+    var keys = [];
+    for (i = 0; i < 7; i++) {
+      var d = new Date(weekStart.getFullYear(), weekStart.getMonth(), weekStart.getDate() + i);
+      var date = dateKey(d); keys.push(date);
+      weekHTML += '<button class="week-day" data-week-day="' + date + '" aria-pressed="' + (date === selectedDate) + '" aria-label="View meals for ' + esc(friendlyDate(date)) + '"><span>' + esc(d.toLocaleDateString(undefined, { weekday: 'short' })) + '</span><strong>' + d.getDate() + '</strong></button>';
+    }
+    ['Breakfast', 'Lunch', 'Dinner', 'Snack'].forEach(function (type) {
+      weekHTML += '<div class="week-label">' + type + '</div>';
+      keys.forEach(function (date) {
+        var matches = state.meals.filter(function (m) { return m.date === date && m.type === type; });
+        var first = matches[0];
+        weekHTML += '<button class="week-slot ' + (first ? first.status : 'vacant') + '" data-slot-date="' + date + '" data-slot-type="' + type + '" aria-label="' + esc(friendlyDate(date) + ', ' + type + (first ? ': ' + matches.map(function (m) { return m.name + ' (' + m.status + ')'; }).join('; ') : ', add meal')) + '">' + (first ? '<span class="slot-status">' + (first.status === 'eaten' ? 'Ate' : 'Planned') + '</span><span class="slot-title">' + esc(first.name) + '</span>' + (matches.length > 1 ? '<span class="slot-more">+' + (matches.length - 1) + ' more</span>' : '') : '<span aria-hidden="true">+</span>') + '</button>';
+      });
+    });
+    el('week-grid').innerHTML = weekHTML;
+    el('selected-date').textContent = friendlyDate(selectedDate);
+    var order = { Breakfast: 0, Lunch: 1, Dinner: 2, Snack: 3 };
+    var dayMeals = state.meals.filter(function (m) { return m.date === selectedDate; }).sort(function (a, b) { return order[a.type] - order[b.type]; });
+    var pages = Math.max(1, Math.ceil(dayMeals.length / mealsPerPage));
+    mealPage = Math.max(0, Math.min(mealPage, pages - 1));
+    el('meals-page').textContent = 'Page ' + (mealPage + 1) + ' of ' + pages;
+    el('meals-prev').disabled = mealPage === 0; el('meals-next').disabled = mealPage === pages - 1;
+    el('meal-list').innerHTML = dayMeals.slice(mealPage * mealsPerPage, (mealPage + 1) * mealsPerPage).map(function (m) {
+      return '<div class="row"><div class="row-content"><small><span class="badge ' + m.status + '">' + (m.status === 'eaten' ? 'Ate' : 'Planned') + '</span>' + esc(m.type) + '</small><span class="meal-title">' + esc(m.name) + '</span>' + (m.notes ? '<small class="meal-note">' + esc(m.notes) + '</small>' : '') + '</div><div>' + (m.status === 'planned' ? '<button class="small" data-eaten="' + esc(m.id) + '">Mark as eaten</button>' : '') + actions('meals', m.id) + '</div></div>';
+    }).join('') || empty('No meals recorded. Add what you ate or plan a meal.');
+  }
+  function shiftCalendar(amount) {
+    if (calendarMode === 'week') { var d = parseDate(selectedDate); d.setDate(d.getDate() + amount * 7); selectedDate = dateKey(d); month = new Date(d.getFullYear(), d.getMonth(), 1); }
+    else { month = new Date(month.getFullYear(), month.getMonth() + amount, 1); }
+    renderCalendar();
+  }
+  el('month-prev').onclick = function () { shiftCalendar(-1); };
+  el('month-next').onclick = function () { shiftCalendar(1); };
+  el('calendar-today').onclick = function () { selectedDate = dateKey(new Date()); month = new Date(new Date().getFullYear(), new Date().getMonth(), 1); mealPage = 0; renderCalendar(); };
+  el('calendar-month').onclick = function () { calendarMode = 'month'; var d = parseDate(selectedDate); month = new Date(d.getFullYear(), d.getMonth(), 1); renderCalendar(); };
+  el('calendar-week').onclick = function () { calendarMode = 'week'; renderCalendar(); };
+  el('back-week').onclick = function () { calendarMode = 'week'; renderCalendar(); };
+  el('meals-prev').onclick = function () { mealPage--; renderCalendar(); };
+  el('meals-next').onclick = function () { mealPage++; renderCalendar(); };
+  function openMeal(value) {
+    el('meal-form').reset(); el('meal-id').value = ''; el('meal-date').value = selectedDate;
+    el('meal-status').value = selectedDate > dateKey(new Date()) ? 'planned' : 'eaten';
+    var m = find(state.meals, value); el('meal-form-title').textContent = m ? 'Edit meal' : 'Record a meal';
+    if (m) { el('meal-id').value = m.id; ['date', 'type', 'status', 'name', 'notes'].forEach(function (key) { el('meal-' + key).value = m[key] || ''; }); el('meal-recipe').value = find(state.recipes, m.recipeId) ? m.recipeId : ''; }
+    calendarMode = 'edit'; renderCalendar(); el('meal-name').focus();
+  }
+  el('new-meal').onclick = function () { openMeal(''); };
+  el('meal-cancel').onclick = function () { calendarMode = 'day'; renderCalendar(); el('new-meal').focus(); };
+  el('meal-recipe').onchange = function () { var r = find(state.recipes, this.value); if (r) el('meal-name').value = r.name; };
+  el('meal-form').onsubmit = function (event) {
+    event.preventDefault();
+    var m = { id: el('meal-id').value || id(), date: el('meal-date').value, type: el('meal-type').value, status: el('meal-status').value, recipeId: el('meal-recipe').value, name: el('meal-name').value.trim(), notes: el('meal-notes').value.trim() };
+    if (!validDate(m.date) || !m.name) { notice('Enter a valid date and meal name.', true); return; }
+    if (m.status === 'eaten' && m.date > dateKey(new Date())) { notice('Future meals must be marked Planned. Record them as eaten after the meal.', true); return; }
+    if (update(function () { replace(state.meals, m); }, 'Meal saved.')) { selectedDate = m.date; var d = parseDate(m.date); month = new Date(d.getFullYear(), d.getMonth(), 1); el('meal-form').hidden = true; calendarMode = 'day'; renderCalendar(); }
+  };
+  document.addEventListener('change', function (event) { var value = event.target.getAttribute('data-check'); if (value) { var checked = event.target.checked; if (!update(function () { find(state.shopping, value).done = checked; }, 'Shopping list updated.')) event.target.checked = !checked; } });
+  document.addEventListener('click', function (event) {
+    var target = event.target.closest('button'); if (!target) return;
+    var value = target.getAttribute('data-id'), kind = target.getAttribute('data-edit');
+    if (kind === 'food') { var f = find(state.food, value); if (!f) return; showFood('add'); el('food-form-title').textContent = 'Edit food'; el('food-id').value = f.id; el('food-name').value = f.name; el('food-quantity').value = f.quantity; el('food-location').value = f.location; el('food-date').value = f.useBy; el('food-name').focus(); }
+    if (kind === 'recipes') openRecipe(value);
+    if (kind === 'meals') openMeal(value);
+    var deletion = target.getAttribute('data-delete');
+    if (deletion && window.confirm('Delete this entry?')) update(function () { remove(state[deletion], value); }, 'Entry deleted.');
+    var day = target.getAttribute('data-day'); if (day) { selectedDate = day; mealPage = 0; calendarMode = 'week'; renderCalendar(); }
+    var weekDay = target.getAttribute('data-week-day'); if (weekDay) { selectedDate = weekDay; mealPage = 0; calendarMode = 'day'; renderCalendar(); }
+    var slot = target.getAttribute('data-slot-date'); if (slot) { selectedDate = slot; mealPage = 0; var type = target.getAttribute('data-slot-type'); if (state.meals.some(function (m) { return m.date === slot && m.type === type; })) { calendarMode = 'day'; renderCalendar(); } else { openMeal(''); el('meal-type').value = type; } }
+    var eaten = target.getAttribute('data-eaten'); if (eaten) { var meal = find(state.meals, eaten); if (meal.date > dateKey(new Date())) { notice('You can mark this meal as eaten on or after its planned date.', true); return; } update(function () { meal.status = 'eaten'; }, 'Meal marked as eaten.'); }
+  });
+  // Receipt images are previewed locally only. No upload or OCR request is made.
+  var receiptURL = null;
+  var receiptGeneration = 0;
+  var receiptRowCounter = 0;
+  function receiptMessage(text) { el('receipt-feedback').textContent = text; }
+  function releaseReceiptPhoto() {
+    receiptGeneration++;
+    el('receipt-preview').onload = null;
+    el('receipt-preview').onerror = null;
+    el('receipt-preview').removeAttribute('src');
+    if (receiptURL) URL.revokeObjectURL(receiptURL);
+    receiptURL = null;
+    el('receipt-file').value = '';
+    el('receipt-photo-panel').hidden = true;
+    el('receipt-filename').textContent = '';
+  }
+  function receiptRowCount() {
+    var count = el('receipt-rows').querySelectorAll('.receipt-item').length;
+    el('receipt-save').disabled = count === 0;
+    return count;
+  }
+  function addReceiptRow() {
+    receiptRowCounter++;
+    var row = document.createElement('fieldset');
+    row.className = 'receipt-item';
+    row.innerHTML = '<legend>Item ' + receiptRowCounter + '</legend><div class="fields"><label>Food name<input data-receipt="name" required maxlength="120" placeholder="Baby spinach"></label><label>Quantity<input data-receipt="quantity" required maxlength="60" placeholder="1 bag"></label><label>Storage location<select data-receipt="location" required><option value="">Choose a location</option><option>Refrigerator</option><option>Freezer</option><option>Pantry</option><option>Evergreen staples</option></select></label><label>Use-by date (optional)<input data-receipt="useBy" type="date"></label></div><button type="button" class="small danger" data-receipt-remove>Remove item</button>';
+    el('receipt-rows').appendChild(row);
+    receiptRowCount();
+    row.querySelector('input').focus();
+  }
+  el('receipt-add-row').onclick = addReceiptRow;
+  el('receipt-rows').onclick = function (event) {
+    var button = event.target.closest('[data-receipt-remove]');
+    if (!button) return;
+    var row = button.closest('.receipt-item');
+    row.parentNode.removeChild(row);
+    receiptRowCount();
+    el('receipt-add-row').focus();
+  };
+  el('receipt-remove-photo').onclick = function () { releaseReceiptPhoto(); receiptMessage('Photo removed. Your review items are unchanged.'); };
+  el('receipt-file').onchange = function () {
+    var file = this.files && this.files[0];
+    if (!file) return;
+    releaseReceiptPhoto();
+    if (file.size > 12 * 1024 * 1024) { receiptMessage('This image is too large. Choose a photo smaller than 12 MB.'); return; }
+    if (!/^image\/(jpeg|png)$/i.test(file.type) && !(file.type === '' && /\.(jpe?g|png)$/i.test(file.name))) {
+      receiptMessage('Choose a JPEG or PNG image. If your photo is HEIC, export it as JPEG first.'); return;
+    }
+    var generation = receiptGeneration;
+    try { receiptURL = URL.createObjectURL(file); }
+    catch (error) { receiptMessage('This browser could not preview the photo. You can still enter groceries below.'); return; }
+    var preview = el('receipt-preview');
+    preview.onload = function () {
+      if (generation !== receiptGeneration) return;
+      el('receipt-photo-panel').hidden = false;
+      el('receipt-filename').textContent = file.name;
+      receiptMessage('Photo ready. Enter the items below; this version does not read the receipt automatically.');
+      if (!receiptRowCount()) addReceiptRow();
+    };
+    preview.onerror = function () {
+      if (generation !== receiptGeneration) return;
+      releaseReceiptPhoto();
+      receiptMessage('The photo could not be opened. Try a different JPEG or PNG. Your review items are unchanged.');
+    };
+    receiptMessage('Opening photo…');
+    preview.src = receiptURL;
+  };
+  el('receipt-form').onsubmit = function (event) {
+    event.preventDefault();
+    var rows = el('receipt-rows').querySelectorAll('.receipt-item');
+    if (!rows.length) { receiptMessage('Add at least one item to review.'); return; }
+    var items = [], invalid = false;
+    Array.prototype.forEach.call(rows, function (row) {
+      function value(key) { return row.querySelector('[data-receipt="' + key + '"]').value.trim(); }
+      var item = { id: id(), name: value('name'), quantity: value('quantity'), location: value('location'), useBy: value('useBy') };
+      if (!item.name || !item.quantity || ['Refrigerator', 'Freezer', 'Pantry', 'Evergreen staples'].indexOf(item.location) < 0 || (item.useBy && !validDate(item.useBy))) invalid = true;
+      items.push(item);
+    });
+    if (invalid) { receiptMessage('Check each item: a name, quantity and storage location are required, and any use-by date must be valid.'); return; }
+    if (update(function () { Array.prototype.push.apply(state.food, items); }, items.length + ' reviewed item' + (items.length === 1 ? '' : 's') + ' added to inventory.')) {
+      el('receipt-rows').innerHTML = '';
+      receiptRowCounter = 0;
+      receiptRowCount();
+      releaseReceiptPhoto();
+      receiptMessage(items.length + ' item' + (items.length === 1 ? '' : 's') + ' saved. Select a storage tab above to see them.');
+    } else { receiptMessage('Items were not saved. Your review list is still here so you can try again.'); }
+  };
+  window.addEventListener('beforeunload', function (event) {
+    if (!receiptRowCount()) return;
+    event.preventDefault(); event.returnValue = '';
+  });
+
+  function renderAll() { renderFood(); renderRecipes(); renderShopping(); renderCalendar(); }
+  function sizeIcons() { document.documentElement.style.setProperty('--icon-size', el('calendar-label').getBoundingClientRect().width + 'px'); }
+  function fitViewport() { document.documentElement.style.setProperty('--app-height', window.innerHeight + 'px'); sizeIcons(); }
+  renderAll(); fitViewport(); window.addEventListener('resize', fitViewport);
+})();
+
+</script>
 </body></html>
