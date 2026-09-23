@@ -19,12 +19,18 @@
 @media(min-width:768px) and (max-height:640px) and (min-height:500px){.app{padding:10px 16px}.top{margin-bottom:8px}.top .eyebrow{display:none}footer{display:none}.calendar-top .eyebrow{display:none}.calendar-top h2{margin-bottom:6px}.calendar-foot{display:none}.month-controls{margin-bottom:4px}.calendar-hint{margin-top:4px}.calendar-grid{grid-gap:2px}.weekdays{margin-bottom:3px}.calendar-legend{margin-bottom:4px}#meal-form .fields{grid-template-columns:repeat(4,minmax(0,1fr))}#meal-form label{font-size:13px}main{padding:14px}}
 @media(max-width:767px){#calendar-week-view{min-height:330px}.week-grid{grid-template-columns:48px repeat(7,minmax(0,1fr))}.week-label{font-size:10px}.week-slot{padding:3px}.slot-title{font-size:11px}.calendar-top{flex-wrap:wrap}.calendar-switch{margin-bottom:10px}.calendar-top .eyebrow{display:none}.header-settings{max-width:160px}.touch-setting{font-size:11px}.touch-setting input{flex:0 0 20px}.header-settings .save-status{display:block;max-width:none}.day-heading{flex-wrap:wrap}.day-heading h3{flex-basis:100%;order:-1;margin:0 0 10px}.meal-pagination>*{margin:0 3px}.calendar-grid button{min-width:0}.week-grid button{padding-left:1px;padding-right:1px}}
 
-body{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22240%22%20height%3D%22208%22%20viewBox%3D%220%200%20240%20208%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23859078%22%20stroke-opacity%3D%22.10%22%20stroke-width%3D%221%22%3E%3Cpath%20d%3D%22M0%200h80l40%2069-40%2070H0l40-70Zm80%200v46l40%2023%2040-23V0m-40%2069v70l40%2023%2040-23V69l-40-23m40%2023%2040-23V0M0%20139l40%2023v46m40-69v46l40%2023%2040-46m40-23%2040%2023m-80%200v46m40-69%2040-70M0%200l40%2023%2040-23M0%2069l40-46m0%20139%2040-23M200%20208v-23l40-23%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");background-size:240px 208px}
+body{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22240%22%20height%3D%22208%22%20viewBox%3D%220%200%20240%20208%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23859078%22%20stroke-opacity%3D%22.15%22%20stroke-width%3D%221%22%3E%3Cpath%20d%3D%22M0%200h80l40%2069-40%2070H0l40-70Zm80%200v46l40%2023%2040-23V0m-40%2069v70l40%2023%2040-23V69l-40-23m40%2023%2040-23V0M0%20139l40%2023v46m40-69v46l40%2023%2040-46m40-23%2040%2023m-80%200v46m40-69%2040-70M0%200l40%2023%2040-23M0%2069l40-46m0%20139%2040-23M200%20208v-23l40-23%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");background-size:240px 208px}
 @media(min-width:768px) and (min-height:500px) and (max-height:579px){.calendar-legend,.calendar-hint{display:none}.month-controls h3{font-size:16px}.calendar-top h2{font-size:24px}}
 
 /* Explicit spacing and checkbox sizing, including older Safari. */
 .header-settings{max-width:300px}.touch-setting{display:flex;flex-direction:row;align-items:center;justify-content:flex-end;min-height:44px;margin:0;line-height:1.3}.touch-setting input[type=checkbox]{display:inline-block;flex:0 0 22px;width:22px;max-width:22px;height:22px;min-height:22px;margin:0 9px 0 0;padding:0;-webkit-appearance:checkbox;appearance:checkbox;border-radius:3px}.touch-setting span{display:block;font-size:12px}.touch-explanation{display:block;font-size:11px;color:var(--muted);margin:0 0 4px}.header-settings .save-status{display:block;font-size:11px;margin:0;max-width:none}.calendar-switch{padding-left:8px}.calendar-switch button{margin-left:0;min-width:76px}.calendar-switch button+button{margin-left:18px}
 @media(max-width:560px){.header-settings{max-width:160px}.touch-setting span{font-size:11px}.touch-explanation{font-size:11px}.calendar-switch{padding-left:0}}
+
+/* Month and selected day share the same calendar surface. */
+#calendar-month-view{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(180px,1fr);grid-column-gap:20px;align-self:stretch;max-width:none;flex:1;min-height:0;padding-top:8px}.month-picker{display:flex;flex-direction:column;min-width:0;min-height:0}.month-picker .weekdays{flex-shrink:0;min-height:26px;margin:0 0 6px;align-items:center}.month-picker .calendar-grid{flex:1;min-height:0;grid-template-rows:repeat(6,minmax(44px,1fr))}.month-picker .calendar-grid button{height:auto;min-height:44px}.month-day-pane{display:flex;flex-direction:column;min-width:0;min-height:0;border-left:1px solid var(--line);padding-left:18px}.month-day-pane h3{background:var(--accent);color:white;text-align:center;font-size:16px;font-weight:500;padding:10px 4px;border-radius:9px;margin:0 0 6px;flex-shrink:0}#month-day-slots{display:grid;grid-template-rows:repeat(4,minmax(44px,1fr));grid-row-gap:6px;flex:1;min-height:0}.day-slot{display:flex;flex-direction:column;justify-content:center;min-width:0;min-height:44px;text-align:left;padding:7px 10px;overflow:hidden}.day-slot-label{display:flex;justify-content:space-between;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-bottom:3px}.day-slot-label>span{margin-left:6px;font-size:11px}.day-slot-title{font-size:14px;line-height:1.25;overflow-wrap:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.day-slot.vacant{background:#f9faf5}.day-slot.vacant .day-slot-title{text-align:center;font-size:22px;line-height:1.1;color:#879583}.day-slot.eaten{background:#e5eee1;border-left:3px solid #527b42}.day-slot.planned{background:#f8f0df;border-left:3px solid #b38133}
+@media(min-width:768px) and (max-height:579px){#calendar-month-view{padding-top:2px}.month-picker .weekdays{min-height:20px;margin-bottom:3px}}
+@media(max-width:767px){#calendar-month-view{grid-column-gap:12px;grid-template-columns:minmax(0,1.7fr) minmax(150px,1fr)}.month-day-pane{padding-left:10px}.month-day-pane h3{font-size:14px}.day-slot{padding:5px 7px}}
+@media(max-width:560px){#calendar-month-view{grid-template-columns:1fr;grid-row-gap:18px}.month-day-pane{border-left:0;padding-left:0}#month-day-slots{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(90px,1fr));grid-column-gap:6px}.month-picker .calendar-grid{min-height:284px}}
 
 </style>
 </head>
@@ -63,7 +69,7 @@ body{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fw
 <div class="calendar-top"><div><div class="eyebrow">Plan ahead. Remember what you ate.</div><h2>Calendar</h2></div><div class="calendar-switch"><button type="button" id="calendar-month" aria-pressed="true">Month</button><button type="button" id="calendar-week" aria-pressed="false">Week</button></div></div>
 <div id="calendar-browse"><div class="month-controls"><button id="month-prev" aria-label="Previous month">←</button><h3 id="month-title"></h3><button id="month-next" aria-label="Next month">→</button><button id="calendar-today">Today</button></div>
 <div class="calendar-legend"><span><b class="dot planned"></b>Planned</span><span><b class="dot eaten"></b>Ate</span></div>
-<div id="calendar-month-view"><div class="weekdays" aria-hidden="true"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div><div id="calendar-grid" class="calendar-grid" aria-label="Select a date to open its week"></div><p class="calendar-hint">Select a date to open its week.</p></div>
+<div id="calendar-month-view"><div class="month-picker"><div class="weekdays" aria-hidden="true"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div><div id="calendar-grid" class="calendar-grid" aria-label="Select a date to view its meals"></div></div><aside class="month-day-pane" aria-label="Selected day's meals"><h3 id="month-selected-date" aria-live="polite"></h3><div id="month-day-slots"></div></aside></div>
 <div id="calendar-week-view" hidden><div id="week-grid" class="week-grid" aria-label="Weekly meals"></div></div>
 </div>
 <div id="calendar-day-view" hidden><div class="day-heading"><button id="back-week">← Week</button><h3 id="selected-date"></h3><button id="new-meal">+ Add meal</button></div><div id="meal-list"></div><div class="meal-pagination"><button id="meals-prev">← Previous</button><span id="meals-page" aria-live="polite"></span><button id="meals-next">Next →</button></div></div>
@@ -79,6 +85,7 @@ body{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fw
   var storageBlocked = false;
   var foodLocation = 'Refrigerator';
   var calendarMode = 'month';
+  var calendarReturnView = 'month';
   var mealPage = 0;
   var mealsPerPage = 2;
   var selectedDate = dateKey(new Date());
@@ -205,8 +212,8 @@ body{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fw
     el('meal-form').hidden = calendarMode !== 'edit';
     el('calendar-month-view').hidden = calendarMode !== 'month';
     el('calendar-week-view').hidden = !isWeek;
-    el('calendar-month').setAttribute('aria-pressed', String(calendarMode === 'month'));
-    el('calendar-week').setAttribute('aria-pressed', String(calendarMode !== 'month'));
+    el('calendar-month').setAttribute('aria-pressed', String(calendarMode === 'month' || ((calendarMode === 'day' || calendarMode === 'edit') && calendarReturnView === 'month')));
+    el('calendar-week').setAttribute('aria-pressed', String(calendarMode === 'week' || ((calendarMode === 'day' || calendarMode === 'edit') && calendarReturnView === 'week')));
     el('month-prev').setAttribute('aria-label', isWeek ? 'Previous week' : 'Previous month');
     el('month-next').setAttribute('aria-label', isWeek ? 'Next week' : 'Next month');
     el('month-title').textContent = isWeek ? weekStart.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + ' – ' + weekEnd.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : month.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
@@ -217,9 +224,17 @@ body{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fw
       var meals = state.meals.filter(function (m) { return m.date === key; });
       var planned = meals.some(function (m) { return m.status === 'planned'; });
       var eaten = meals.some(function (m) { return m.status === 'eaten'; });
-      html += '<button data-single-tap="true" data-day="' + key + '" aria-pressed="' + (key === selectedDate) + '" class="' + (key === dateKey(new Date()) ? 'today' : '') + '" aria-label="' + esc(friendlyDate(key)) + ', open week' + (planned ? ', planned meals' : '') + (eaten ? ', meals eaten' : '') + '">' + i + '<span class="dots" aria-hidden="true">' + (planned ? '<b class="dot planned"></b>' : '') + (eaten ? '<b class="dot eaten"></b>' : '') + '</span></button>';
+      html += '<button data-single-tap="true" data-day="' + key + '" aria-pressed="' + (key === selectedDate) + '" class="' + (key === dateKey(new Date()) ? 'today' : '') + '" aria-label="' + esc(friendlyDate(key)) + ', view meals' + (planned ? ', planned meals' : '') + (eaten ? ', meals eaten' : '') + '">' + i + '<span class="dots" aria-hidden="true">' + (planned ? '<b class="dot planned"></b>' : '') + (eaten ? '<b class="dot eaten"></b>' : '') + '</span></button>';
     }
+    for (i = month.getDay() + days; i < 42; i++) html += '<span aria-hidden="true"></span>';
     el('calendar-grid').innerHTML = html;
+    el('back-week').textContent = calendarReturnView === 'month' ? '← Month' : '← Week';
+    el('month-selected-date').textContent = parseDate(selectedDate).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
+    el('month-day-slots').innerHTML = ['Breakfast', 'Lunch', 'Dinner', 'Snack'].map(function (type) {
+      var matches = state.meals.filter(function (m) { return m.date === selectedDate && m.type === type; });
+      var first = matches[0];
+      return '<button type="button" class="day-slot ' + (first ? first.status : 'vacant') + '" data-slot-origin="month" data-slot-date="' + selectedDate + '" data-slot-type="' + type + '" aria-label="' + esc(friendlyDate(selectedDate) + ', ' + type + (first ? ': ' + matches.map(function (m) { return m.name + ' (' + m.status + ')'; }).join('; ') : ', add meal')) + '"><span class="day-slot-label">' + type + (first ? '<span>' + (first.status === 'eaten' ? 'Ate' : 'Planned') + '</span>' : '') + '</span><span class="day-slot-title">' + (first ? esc(first.name) : '+') + '</span>' + (matches.length > 1 ? '<span class="slot-more">+' + (matches.length - 1) + ' more</span>' : '') + '</button>';
+    }).join('');
     var weekHTML = '<div class="week-corner">Meal</div>';
     var keys = [];
     for (i = 0; i < 7; i++) {
@@ -249,15 +264,15 @@ body{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fw
   }
   function shiftCalendar(amount) {
     if (calendarMode === 'week') { var d = parseDate(selectedDate); d.setDate(d.getDate() + amount * 7); selectedDate = dateKey(d); month = new Date(d.getFullYear(), d.getMonth(), 1); }
-    else { month = new Date(month.getFullYear(), month.getMonth() + amount, 1); }
+    else { var dayNumber = parseDate(selectedDate).getDate(); month = new Date(month.getFullYear(), month.getMonth() + amount, 1); selectedDate = dateKey(new Date(month.getFullYear(), month.getMonth(), Math.min(dayNumber, new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate()))); mealPage = 0; }
     renderCalendar();
   }
   el('month-prev').onclick = function () { shiftCalendar(-1); };
   el('month-next').onclick = function () { shiftCalendar(1); };
   el('calendar-today').onclick = function () { selectedDate = dateKey(new Date()); month = new Date(new Date().getFullYear(), new Date().getMonth(), 1); mealPage = 0; renderCalendar(); };
-  el('calendar-month').onclick = function () { calendarMode = 'month'; var d = parseDate(selectedDate); month = new Date(d.getFullYear(), d.getMonth(), 1); renderCalendar(); };
-  el('calendar-week').onclick = function () { calendarMode = 'week'; renderCalendar(); };
-  el('back-week').onclick = function () { calendarMode = 'week'; renderCalendar(); };
+  el('calendar-month').onclick = function () { calendarReturnView = 'month'; calendarMode = 'month'; var d = parseDate(selectedDate); month = new Date(d.getFullYear(), d.getMonth(), 1); renderCalendar(); };
+  el('calendar-week').onclick = function () { calendarReturnView = 'week'; calendarMode = 'week'; renderCalendar(); };
+  el('back-week').onclick = function () { calendarMode = calendarReturnView; renderCalendar(); };
   el('meals-prev').onclick = function () { mealPage--; renderCalendar(); };
   el('meals-next').onclick = function () { mealPage++; renderCalendar(); };
   function openMeal(value) {
@@ -268,14 +283,14 @@ body{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fw
     calendarMode = 'edit'; renderCalendar(); el('meal-name').focus();
   }
   el('new-meal').onclick = function () { openMeal(''); };
-  el('meal-cancel').onclick = function () { calendarMode = 'day'; renderCalendar(); el('new-meal').focus(); };
+  el('meal-cancel').onclick = function () { calendarMode = calendarReturnView; renderCalendar(); el('calendar-' + calendarReturnView).focus(); };
   el('meal-recipe').onchange = function () { var r = find(state.recipes, this.value); if (r) el('meal-name').value = r.name; };
   el('meal-form').onsubmit = function (event) {
     event.preventDefault();
     var m = { id: el('meal-id').value || id(), date: el('meal-date').value, type: el('meal-type').value, status: el('meal-status').value, recipeId: el('meal-recipe').value, name: el('meal-name').value.trim(), notes: el('meal-notes').value.trim() };
     if (!validDate(m.date) || !m.name) { notice('Enter a valid date and meal name.', true); return; }
     if (m.status === 'eaten' && m.date > dateKey(new Date())) { notice('Future meals must be marked Planned. Record them as eaten after the meal.', true); return; }
-    if (update(function () { replace(state.meals, m); }, 'Meal saved.')) { selectedDate = m.date; var d = parseDate(m.date); month = new Date(d.getFullYear(), d.getMonth(), 1); el('meal-form').hidden = true; calendarMode = 'day'; renderCalendar(); }
+    if (update(function () { replace(state.meals, m); }, 'Meal saved.')) { selectedDate = m.date; var d = parseDate(m.date); month = new Date(d.getFullYear(), d.getMonth(), 1); el('meal-form').hidden = true; calendarMode = calendarReturnView; renderCalendar(); }
   };
   document.addEventListener('change', function (event) { var value = event.target.getAttribute('data-check'); if (value) { var checked = event.target.checked; if (!update(function () { find(state.shopping, value).done = checked; }, 'Shopping list updated.')) event.target.checked = !checked; } });
   document.addEventListener('click', function (event) {
@@ -286,9 +301,9 @@ body{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fw
     if (kind === 'meals') openMeal(value);
     var deletion = target.getAttribute('data-delete');
     if (deletion && window.confirm('Delete this entry?')) update(function () { remove(state[deletion], value); }, 'Entry deleted.');
-    var day = target.getAttribute('data-day'); if (day) { selectedDate = day; mealPage = 0; calendarMode = 'week'; renderCalendar(); }
-    var weekDay = target.getAttribute('data-week-day'); if (weekDay) { selectedDate = weekDay; mealPage = 0; calendarMode = 'day'; renderCalendar(); }
-    var slot = target.getAttribute('data-slot-date'); if (slot) { selectedDate = slot; mealPage = 0; var type = target.getAttribute('data-slot-type'); if (state.meals.some(function (m) { return m.date === slot && m.type === type; })) { calendarMode = 'day'; renderCalendar(); } else { openMeal(''); el('meal-type').value = type; } }
+    var day = target.getAttribute('data-day'); if (day) { selectedDate = day; mealPage = 0; calendarReturnView = 'month'; calendarMode = 'month'; renderCalendar(); }
+    var weekDay = target.getAttribute('data-week-day'); if (weekDay) { calendarReturnView = 'week'; selectedDate = weekDay; mealPage = 0; calendarMode = 'day'; renderCalendar(); }
+    var slot = target.getAttribute('data-slot-date'); if (slot) { calendarReturnView = target.getAttribute('data-slot-origin') === 'month' ? 'month' : 'week'; selectedDate = slot; mealPage = 0; var type = target.getAttribute('data-slot-type'); if (state.meals.some(function (m) { return m.date === slot && m.type === type; })) { calendarMode = 'day'; renderCalendar(); } else { openMeal(''); el('meal-type').value = type; } }
     var eaten = target.getAttribute('data-eaten'); if (eaten) { var meal = find(state.meals, eaten); if (meal.date > dateKey(new Date())) { notice('You can mark this meal as eaten on or after its planned date.', true); return; } update(function () { meal.status = 'eaten'; }, 'Meal marked as eaten.'); }
   });
   // Receipt images are previewed locally only. No upload or OCR request is made.
