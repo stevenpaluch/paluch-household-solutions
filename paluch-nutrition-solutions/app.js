@@ -168,6 +168,98 @@
     var day = target.getAttribute('data-day'); if (day) { selectedDate = day; el('meal-form').hidden = true; renderCalendar(); }
     var eaten = target.getAttribute('data-eaten'); if (eaten) { var meal = find(state.meals, eaten); if (meal.date > dateKey(new Date())) { notice('You can mark this meal as eaten on or after its planned date.', true); return; } update(function () { meal.status = 'eaten'; }, 'Meal marked as eaten.'); }
   });
+  // Receipt images are previewed locally only. No upload or OCR request is made.
+  var receiptURL = null;
+  var receiptGeneration = 0;
+  var receiptRowCounter = 0;
+  function receiptMessage(text) { el('receipt-feedback').textContent = text; }
+  function releaseReceiptPhoto() {
+    receiptGeneration++;
+    el('receipt-preview').onload = null;
+    el('receipt-preview').onerror = null;
+    el('receipt-preview').removeAttribute('src');
+    if (receiptURL) URL.revokeObjectURL(receiptURL);
+    receiptURL = null;
+    el('receipt-file').value = '';
+    el('receipt-photo-panel').hidden = true;
+    el('receipt-filename').textContent = '';
+  }
+  function receiptRowCount() {
+    var count = el('receipt-rows').querySelectorAll('.receipt-item').length;
+    el('receipt-save').disabled = count === 0;
+    return count;
+  }
+  function addReceiptRow() {
+    receiptRowCounter++;
+    var row = document.createElement('fieldset');
+    row.className = 'receipt-item';
+    row.innerHTML = '<legend>Item ' + receiptRowCounter + '</legend><div class="fields"><label>Food name<input data-receipt="name" required maxlength="120" placeholder="Baby spinach"></label><label>Quantity<input data-receipt="quantity" required maxlength="60" placeholder="1 bag"></label><label>Storage location<select data-receipt="location" required><option value="">Choose a location</option><option>Refrigerator</option><option>Freezer</option><option>Pantry</option><option>Evergreen staples</option></select></label><label>Use-by date (optional)<input data-receipt="useBy" type="date"></label></div><button type="button" class="small danger" data-receipt-remove>Remove item</button>';
+    el('receipt-rows').appendChild(row);
+    receiptRowCount();
+    row.querySelector('input').focus();
+  }
+  el('receipt-add-row').onclick = addReceiptRow;
+  el('receipt-rows').onclick = function (event) {
+    var button = event.target.closest('[data-receipt-remove]');
+    if (!button) return;
+    var row = button.closest('.receipt-item');
+    row.parentNode.removeChild(row);
+    receiptRowCount();
+    el('receipt-add-row').focus();
+  };
+  el('receipt-remove-photo').onclick = function () { releaseReceiptPhoto(); receiptMessage('Photo removed. Your review items are unchanged.'); };
+  el('receipt-file').onchange = function () {
+    var file = this.files && this.files[0];
+    if (!file) return;
+    releaseReceiptPhoto();
+    if (file.size > 12 * 1024 * 1024) { receiptMessage('This image is too large. Choose a photo smaller than 12 MB.'); return; }
+    if (!/^image\/(jpeg|png)$/i.test(file.type) && !(file.type === '' && /\.(jpe?g|png)$/i.test(file.name))) {
+      receiptMessage('Choose a JPEG or PNG image. If your photo is HEIC, export it as JPEG first.'); return;
+    }
+    var generation = receiptGeneration;
+    try { receiptURL = URL.createObjectURL(file); }
+    catch (error) { receiptMessage('This browser could not preview the photo. You can still enter groceries below.'); return; }
+    var preview = el('receipt-preview');
+    preview.onload = function () {
+      if (generation !== receiptGeneration) return;
+      el('receipt-photo-panel').hidden = false;
+      el('receipt-filename').textContent = file.name;
+      receiptMessage('Photo ready. Enter the items below; this version does not read the receipt automatically.');
+      if (!receiptRowCount()) addReceiptRow();
+    };
+    preview.onerror = function () {
+      if (generation !== receiptGeneration) return;
+      releaseReceiptPhoto();
+      receiptMessage('The photo could not be opened. Try a different JPEG or PNG. Your review items are unchanged.');
+    };
+    receiptMessage('Opening photo…');
+    preview.src = receiptURL;
+  };
+  el('receipt-form').onsubmit = function (event) {
+    event.preventDefault();
+    var rows = el('receipt-rows').querySelectorAll('.receipt-item');
+    if (!rows.length) { receiptMessage('Add at least one item to review.'); return; }
+    var items = [], invalid = false;
+    Array.prototype.forEach.call(rows, function (row) {
+      function value(key) { return row.querySelector('[data-receipt="' + key + '"]').value.trim(); }
+      var item = { id: id(), name: value('name'), quantity: value('quantity'), location: value('location'), useBy: value('useBy') };
+      if (!item.name || !item.quantity || ['Refrigerator', 'Freezer', 'Pantry', 'Evergreen staples'].indexOf(item.location) < 0 || (item.useBy && !validDate(item.useBy))) invalid = true;
+      items.push(item);
+    });
+    if (invalid) { receiptMessage('Check each item: a name, quantity and storage location are required, and any use-by date must be valid.'); return; }
+    if (update(function () { Array.prototype.push.apply(state.food, items); }, items.length + ' reviewed item' + (items.length === 1 ? '' : 's') + ' added to inventory.')) {
+      el('receipt-rows').innerHTML = '';
+      receiptRowCounter = 0;
+      receiptRowCount();
+      releaseReceiptPhoto();
+      receiptMessage(items.length + ' item' + (items.length === 1 ? '' : 's') + ' saved. Select a storage tab above to see them.');
+    } else { receiptMessage('Items were not saved. Your review list is still here so you can try again.'); }
+  };
+  window.addEventListener('beforeunload', function (event) {
+    if (!receiptRowCount()) return;
+    event.preventDefault(); event.returnValue = '';
+  });
+
   function renderAll() { renderFood(); renderRecipes(); renderShopping(); renderCalendar(); }
   function sizeIcons() { document.documentElement.style.setProperty('--icon-size', el('calendar-label').getBoundingClientRect().width + 'px'); }
   renderAll(); sizeIcons(); window.addEventListener('resize', sizeIcons);
