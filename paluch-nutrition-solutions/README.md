@@ -57,3 +57,16 @@ Photos are never transmitted or stored, and review drafts are not saved across r
 To install this update, replace index.html, styles.css and app.js together in the existing paluch-nutrition-solutions folder. Keep the same site address to preserve that browser's existing inventory. Do not upload the ZIP itself as the website.
 
 Receipt logic checks passed for batch saves, validation, duplicate-submit prevention, save-failure retry, photo size/type rejection, preview load/error handling, releasing preview images and retaining draft items. These were simulated DOM checks; camera/photo selection and layout still need actual browser and iPad testing.
+
+## Tablet design update
+
+- Replaced navigation artwork with a consistent outlined refrigerator, chef's hat, shopping basket and calendar. Icons remain square and match the measured width of the Calendar label.
+- Added a small hover shadow for mouse users and a pale, original geometric line pattern behind the app. The reference image itself is not embedded.
+- Added touch-only double-tap activation for buttons, enabled by default, with a header checkbox to switch it off. Tap the same button twice within 700 ms. The first tap highlights the button; the second activates it. Drag gestures and delayed synthetic clicks are suppressed. Mouse and keyboard activation remain single-press; form inputs and the checkbox retain normal touch behavior.
+- The landscape tablet shell uses the available browser height rather than the display's physical pixel count. The calendar is constrained to its panel, including six-row months. Smaller screens and on-screen-keyboard layouts may reflow. Other long forms and inventories can still scroll inside their content panel; the outer tablet page stays fixed.
+- The compact month picker opens the selected date's week. Week view presents seven day columns with Breakfast, Lunch, Dinner and Snack rows. Select an empty slot to add a meal, or a populated slot/day heading to inspect that day's entries. Two entries appear per detail page with Previous/Next controls.
+- Month/week navigation crosses month and year boundaries. Meal history and the existing browser storage key are preserved. Google Calendar and automatic suggestions remain unconnected. The intended Google account is paluchhsadmin@gmail.com.
+
+Install by replacing the same three files together: index.html, styles.css and app.js. No additional icon, font, image or script download is required.
+
+Validation: syntax and simulated-DOM regression checks passed, including month-to-week transitions, 28 weekly slots, year rollover, leap day, occupied/empty slot behavior, meal pagination and existing receipt/inventory flows. Separate event tests passed for double tap, timeout, switching targets, drag cancellation, ghost-click suppression and the off switch. Actual rendering, camera input and touch behavior still require testing on the iPad mini 3. Local browser preview remained unavailable, so a no-scroll result on the device has not been visually verified.

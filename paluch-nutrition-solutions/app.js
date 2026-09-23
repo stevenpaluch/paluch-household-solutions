@@ -4,6 +4,9 @@
   var state = { version: 1, food: [], recipes: [], shopping: [], meals: [], preferences: {} };
   var storageBlocked = false;
   var foodLocation = 'Refrigerator';
+  var calendarMode = 'month';
+  var mealPage = 0;
+  var mealsPerPage = 2;
   var selectedDate = dateKey(new Date());
   var month = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
   function el(id) { return document.getElementById(id); }
@@ -52,6 +55,7 @@
   function showPage(page) {
     each('[data-page]', function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-page') === page)); });
     each('[data-panel]', function (p) { p.hidden = p.getAttribute('data-panel') !== page; });
+    document.querySelector('main').classList.toggle('calendar-active', page === 'calendar');
   }
   function showFood(location) {
     foodLocation = location;
@@ -117,8 +121,21 @@
   }
   el('shopping-form').onsubmit = function (event) { event.preventDefault(); var name = el('shopping-name').value.trim(); if (!name) { notice('Enter an item name.', true); return; } var item = { id: id(), name: name, quantity: el('shopping-quantity').value.trim(), done: false }; if (update(function () { state.shopping.push(item); }, 'Shopping item added.')) el('shopping-form').reset(); };
   function friendlyDate(key) { return parseDate(key).toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }); }
+  function startOfWeek(key) { var d = parseDate(key); d.setDate(d.getDate() - d.getDay()); return d; }
   function renderCalendar() {
-    el('month-title').textContent = month.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+    var weekStart = startOfWeek(selectedDate);
+    var weekEnd = new Date(weekStart.getFullYear(), weekStart.getMonth(), weekStart.getDate() + 6);
+    var isWeek = calendarMode === 'week';
+    el('calendar-browse').hidden = calendarMode === 'day' || calendarMode === 'edit';
+    el('calendar-day-view').hidden = calendarMode !== 'day';
+    el('meal-form').hidden = calendarMode !== 'edit';
+    el('calendar-month-view').hidden = calendarMode !== 'month';
+    el('calendar-week-view').hidden = !isWeek;
+    el('calendar-month').setAttribute('aria-pressed', String(calendarMode === 'month'));
+    el('calendar-week').setAttribute('aria-pressed', String(calendarMode !== 'month'));
+    el('month-prev').setAttribute('aria-label', isWeek ? 'Previous week' : 'Previous month');
+    el('month-next').setAttribute('aria-label', isWeek ? 'Next week' : 'Next month');
+    el('month-title').textContent = isWeek ? weekStart.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + ' – ' + weekEnd.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : month.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
     var html = '', i, days = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate();
     for (i = 0; i < month.getDay(); i++) html += '<span></span>';
     for (i = 1; i <= days; i++) {
@@ -126,35 +143,65 @@
       var meals = state.meals.filter(function (m) { return m.date === key; });
       var planned = meals.some(function (m) { return m.status === 'planned'; });
       var eaten = meals.some(function (m) { return m.status === 'eaten'; });
-      html += '<button data-day="' + key + '" aria-pressed="' + (key === selectedDate) + '" class="' + (key === dateKey(new Date()) ? 'today' : '') + '" aria-label="' + esc(friendlyDate(key)) + (planned ? ', planned meals' : '') + (eaten ? ', meals eaten' : '') + '">' + i + '<span class="dots" aria-hidden="true">' + (planned ? '<b class="dot planned"></b>' : '') + (eaten ? '<b class="dot eaten"></b>' : '') + '</span></button>';
+      html += '<button data-day="' + key + '" aria-pressed="' + (key === selectedDate) + '" class="' + (key === dateKey(new Date()) ? 'today' : '') + '" aria-label="' + esc(friendlyDate(key)) + ', open week' + (planned ? ', planned meals' : '') + (eaten ? ', meals eaten' : '') + '">' + i + '<span class="dots" aria-hidden="true">' + (planned ? '<b class="dot planned"></b>' : '') + (eaten ? '<b class="dot eaten"></b>' : '') + '</span></button>';
     }
     el('calendar-grid').innerHTML = html;
+    var weekHTML = '<div class="week-corner">Meal</div>';
+    var keys = [];
+    for (i = 0; i < 7; i++) {
+      var d = new Date(weekStart.getFullYear(), weekStart.getMonth(), weekStart.getDate() + i);
+      var date = dateKey(d); keys.push(date);
+      weekHTML += '<button class="week-day" data-week-day="' + date + '" aria-pressed="' + (date === selectedDate) + '" aria-label="View meals for ' + esc(friendlyDate(date)) + '"><span>' + esc(d.toLocaleDateString(undefined, { weekday: 'short' })) + '</span><strong>' + d.getDate() + '</strong></button>';
+    }
+    ['Breakfast', 'Lunch', 'Dinner', 'Snack'].forEach(function (type) {
+      weekHTML += '<div class="week-label">' + type + '</div>';
+      keys.forEach(function (date) {
+        var matches = state.meals.filter(function (m) { return m.date === date && m.type === type; });
+        var first = matches[0];
+        weekHTML += '<button class="week-slot ' + (first ? first.status : 'vacant') + '" data-slot-date="' + date + '" data-slot-type="' + type + '" aria-label="' + esc(friendlyDate(date) + ', ' + type + (first ? ': ' + matches.map(function (m) { return m.name + ' (' + m.status + ')'; }).join('; ') : ', add meal')) + '">' + (first ? '<span class="slot-status">' + (first.status === 'eaten' ? 'Ate' : 'Planned') + '</span><span class="slot-title">' + esc(first.name) + '</span>' + (matches.length > 1 ? '<span class="slot-more">+' + (matches.length - 1) + ' more</span>' : '') : '<span aria-hidden="true">+</span>') + '</button>';
+      });
+    });
+    el('week-grid').innerHTML = weekHTML;
     el('selected-date').textContent = friendlyDate(selectedDate);
     var order = { Breakfast: 0, Lunch: 1, Dinner: 2, Snack: 3 };
     var dayMeals = state.meals.filter(function (m) { return m.date === selectedDate; }).sort(function (a, b) { return order[a.type] - order[b.type]; });
-    el('meal-list').innerHTML = dayMeals.map(function (m) {
-      return '<div class="row"><div class="row-content"><small><span class="badge ' + m.status + '">' + (m.status === 'eaten' ? 'Ate' : 'Planned') + '</span>' + esc(m.type) + '</small>' + esc(m.name) + (m.notes ? '<small>' + esc(m.notes) + '</small>' : '') + '</div><div>' + (m.status === 'planned' ? '<button class="small" data-eaten="' + esc(m.id) + '">Mark as eaten</button>' : '') + actions('meals', m.id) + '</div></div>';
-    }).join('') || empty('No meals recorded for this day. Add what you ate or plan a meal.');
+    var pages = Math.max(1, Math.ceil(dayMeals.length / mealsPerPage));
+    mealPage = Math.max(0, Math.min(mealPage, pages - 1));
+    el('meals-page').textContent = 'Page ' + (mealPage + 1) + ' of ' + pages;
+    el('meals-prev').disabled = mealPage === 0; el('meals-next').disabled = mealPage === pages - 1;
+    el('meal-list').innerHTML = dayMeals.slice(mealPage * mealsPerPage, (mealPage + 1) * mealsPerPage).map(function (m) {
+      return '<div class="row"><div class="row-content"><small><span class="badge ' + m.status + '">' + (m.status === 'eaten' ? 'Ate' : 'Planned') + '</span>' + esc(m.type) + '</small><span class="meal-title">' + esc(m.name) + '</span>' + (m.notes ? '<small class="meal-note">' + esc(m.notes) + '</small>' : '') + '</div><div>' + (m.status === 'planned' ? '<button class="small" data-eaten="' + esc(m.id) + '">Mark as eaten</button>' : '') + actions('meals', m.id) + '</div></div>';
+    }).join('') || empty('No meals recorded. Add what you ate or plan a meal.');
   }
-  el('month-prev').onclick = function () { month = new Date(month.getFullYear(), month.getMonth() - 1, 1); renderCalendar(); };
-  el('month-next').onclick = function () { month = new Date(month.getFullYear(), month.getMonth() + 1, 1); renderCalendar(); };
-  el('calendar-today').onclick = function () { selectedDate = dateKey(new Date()); month = new Date(new Date().getFullYear(), new Date().getMonth(), 1); el('meal-form').hidden = true; renderCalendar(); };
+  function shiftCalendar(amount) {
+    if (calendarMode === 'week') { var d = parseDate(selectedDate); d.setDate(d.getDate() + amount * 7); selectedDate = dateKey(d); month = new Date(d.getFullYear(), d.getMonth(), 1); }
+    else { month = new Date(month.getFullYear(), month.getMonth() + amount, 1); }
+    renderCalendar();
+  }
+  el('month-prev').onclick = function () { shiftCalendar(-1); };
+  el('month-next').onclick = function () { shiftCalendar(1); };
+  el('calendar-today').onclick = function () { selectedDate = dateKey(new Date()); month = new Date(new Date().getFullYear(), new Date().getMonth(), 1); mealPage = 0; renderCalendar(); };
+  el('calendar-month').onclick = function () { calendarMode = 'month'; var d = parseDate(selectedDate); month = new Date(d.getFullYear(), d.getMonth(), 1); renderCalendar(); };
+  el('calendar-week').onclick = function () { calendarMode = 'week'; renderCalendar(); };
+  el('back-week').onclick = function () { calendarMode = 'week'; renderCalendar(); };
+  el('meals-prev').onclick = function () { mealPage--; renderCalendar(); };
+  el('meals-next').onclick = function () { mealPage++; renderCalendar(); };
   function openMeal(value) {
     el('meal-form').reset(); el('meal-id').value = ''; el('meal-date').value = selectedDate;
     el('meal-status').value = selectedDate > dateKey(new Date()) ? 'planned' : 'eaten';
     var m = find(state.meals, value); el('meal-form-title').textContent = m ? 'Edit meal' : 'Record a meal';
     if (m) { el('meal-id').value = m.id; ['date', 'type', 'status', 'name', 'notes'].forEach(function (key) { el('meal-' + key).value = m[key] || ''; }); el('meal-recipe').value = find(state.recipes, m.recipeId) ? m.recipeId : ''; }
-    el('meal-form').hidden = false; el('meal-name').focus();
+    calendarMode = 'edit'; renderCalendar(); el('meal-name').focus();
   }
   el('new-meal').onclick = function () { openMeal(''); };
-  el('meal-cancel').onclick = function () { el('meal-form').hidden = true; };
+  el('meal-cancel').onclick = function () { calendarMode = 'day'; renderCalendar(); el('new-meal').focus(); };
   el('meal-recipe').onchange = function () { var r = find(state.recipes, this.value); if (r) el('meal-name').value = r.name; };
   el('meal-form').onsubmit = function (event) {
     event.preventDefault();
     var m = { id: el('meal-id').value || id(), date: el('meal-date').value, type: el('meal-type').value, status: el('meal-status').value, recipeId: el('meal-recipe').value, name: el('meal-name').value.trim(), notes: el('meal-notes').value.trim() };
     if (!validDate(m.date) || !m.name) { notice('Enter a valid date and meal name.', true); return; }
     if (m.status === 'eaten' && m.date > dateKey(new Date())) { notice('Future meals must be marked Planned. Record them as eaten after the meal.', true); return; }
-    if (update(function () { replace(state.meals, m); }, 'Meal saved.')) { selectedDate = m.date; var d = parseDate(m.date); month = new Date(d.getFullYear(), d.getMonth(), 1); el('meal-form').hidden = true; renderCalendar(); }
+    if (update(function () { replace(state.meals, m); }, 'Meal saved.')) { selectedDate = m.date; var d = parseDate(m.date); month = new Date(d.getFullYear(), d.getMonth(), 1); el('meal-form').hidden = true; calendarMode = 'day'; renderCalendar(); }
   };
   document.addEventListener('change', function (event) { var value = event.target.getAttribute('data-check'); if (value) { var checked = event.target.checked; if (!update(function () { find(state.shopping, value).done = checked; }, 'Shopping list updated.')) event.target.checked = !checked; } });
   document.addEventListener('click', function (event) {
@@ -165,7 +212,9 @@
     if (kind === 'meals') openMeal(value);
     var deletion = target.getAttribute('data-delete');
     if (deletion && window.confirm('Delete this entry?')) update(function () { remove(state[deletion], value); }, 'Entry deleted.');
-    var day = target.getAttribute('data-day'); if (day) { selectedDate = day; el('meal-form').hidden = true; renderCalendar(); }
+    var day = target.getAttribute('data-day'); if (day) { selectedDate = day; mealPage = 0; calendarMode = 'week'; renderCalendar(); }
+    var weekDay = target.getAttribute('data-week-day'); if (weekDay) { selectedDate = weekDay; mealPage = 0; calendarMode = 'day'; renderCalendar(); }
+    var slot = target.getAttribute('data-slot-date'); if (slot) { selectedDate = slot; mealPage = 0; var type = target.getAttribute('data-slot-type'); if (state.meals.some(function (m) { return m.date === slot && m.type === type; })) { calendarMode = 'day'; renderCalendar(); } else { openMeal(''); el('meal-type').value = type; } }
     var eaten = target.getAttribute('data-eaten'); if (eaten) { var meal = find(state.meals, eaten); if (meal.date > dateKey(new Date())) { notice('You can mark this meal as eaten on or after its planned date.', true); return; } update(function () { meal.status = 'eaten'; }, 'Meal marked as eaten.'); }
   });
   // Receipt images are previewed locally only. No upload or OCR request is made.
@@ -262,5 +311,61 @@
 
   function renderAll() { renderFood(); renderRecipes(); renderShopping(); renderCalendar(); }
   function sizeIcons() { document.documentElement.style.setProperty('--icon-size', el('calendar-label').getBoundingClientRect().width + 'px'); }
-  renderAll(); sizeIcons(); window.addEventListener('resize', sizeIcons);
+  function fitViewport() { document.documentElement.style.setProperty('--app-height', window.innerHeight + 'px'); sizeIcons(); }
+  renderAll(); fitViewport(); window.addEventListener('resize', fitViewport);
+})();
+
+(function () {
+  'use strict';
+  var toggle = document.getElementById('double-tap');
+  var hint = document.getElementById('touch-hint');
+  var armed = null, armedAt = 0, expiry = null, start = null, lastTouchAt = 0;
+  var enabled = true;
+  try { enabled = localStorage.getItem('paluch-double-tap') !== 'off'; } catch (error) {}
+  toggle.checked = enabled;
+  function clear() {
+    if (armed) armed.classList.remove('tap-armed');
+    armed = null; armedAt = 0;
+    if (expiry) clearTimeout(expiry);
+    hint.textContent = '';
+  }
+  toggle.onchange = function () {
+    enabled = toggle.checked; clear();
+    try { localStorage.setItem('paluch-double-tap', enabled ? 'on' : 'off'); } catch (error) {}
+  };
+  document.addEventListener('touchstart', function (event) {
+    if (!enabled) return;
+    var button = event.target.closest('button');
+    if (!button || button.disabled || event.touches.length !== 1) { start = null; clear(); return; }
+    start = { button: button, x: event.touches[0].clientX, y: event.touches[0].clientY, moved: false };
+  }, { passive: true, capture: true });
+  document.addEventListener('touchmove', function (event) {
+    if (!start || event.touches.length !== 1) { start = null; return; }
+    if (Math.abs(event.touches[0].clientX - start.x) > 12 || Math.abs(event.touches[0].clientY - start.y) > 12) start.moved = true;
+  }, { passive: true, capture: true });
+  document.addEventListener('touchcancel', function () { start = null; clear(); }, { passive: true, capture: true });
+  document.addEventListener('touchend', function (event) {
+    if (!enabled || !start) return;
+    var touch = start; start = null;
+    // Suppress the browser's generated click. Only our second tap activates it.
+    event.preventDefault();
+    lastTouchAt = Date.now();
+    if (touch.moved || event.touches.length) { clear(); return; }
+    var button = touch.button;
+    if (button.disabled || !document.documentElement.contains(button)) { clear(); return; }
+    if (armed === button && Date.now() - armedAt <= 700) {
+      clear();
+      button.click();
+    } else {
+      clear(); armed = button; armedAt = Date.now(); button.classList.add('tap-armed');
+      hint.textContent = 'Tap again to activate';
+      expiry = setTimeout(clear, 700);
+    }
+  }, { passive: false, capture: true });
+  document.addEventListener('click', function (event) {
+    // Ignore delayed touch-generated mouse events; keyboard and .click() use detail 0.
+    if (enabled && event.detail > 0 && Date.now() - lastTouchAt < 800 && event.target.closest('button')) {
+      event.preventDefault(); event.stopImmediatePropagation();
+    }
+  }, true);
 })();
